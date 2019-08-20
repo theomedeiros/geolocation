@@ -1,0 +1,13 @@
+<mvc:View xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m" 
+	controllerName="theo.dev.geolocation.controller.Map"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:cc="theo.dev.geolocation.control">
+	<Page title="Title">
+		<content>
+				<cc:OpenStreetMap
+					/>
+		</content>
+	</Page>
+</mvc:View>
