@@ -6,10 +6,7 @@
 	xmlns:cc="theo.dev.geolocation.control">
 	<Page title="{i18n/title}">
 		<content>
-			<cc:FormBusca
-				id="form"
-				/>
-			<cc:OpenStreetMap
+			<cc:Leaflet
 				id="map"
 				/>
 		</content>

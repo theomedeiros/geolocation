@@ -6,51 +6,56 @@ sap.ui.define([
 ], function (Control, HBox, Input, Button) {
 	"use strict";
 	return Control.extend("theo.dev.geolocation.control.FormBusca", {
-		metadata : {
-			properties : {
+		metadata: {
+			properties: {
 				id: {
 					type: 'string'
 				}
 			},
-			aggregations : {
+			aggregations: {
 				_form: {
-					type: "sap.ui.core.Control", multiple: false, visibility : "hidden"
+					type: "sap.ui.core.Control",
+					multiple: false,
+					visibility: "hidden"
 				}
 			},
-			events : {
-				busca: {
-				// 	parameters: {
-				// 		event: { type: "sap.ui.base.Event" }
-				// 	}
-				}
+			events: {
+				busca: {},
+				buscaEndereco: {}
 			}
 		},
-		init : function () {
-			
+		init: function () {
+
 			this.setAggregation("_form", new HBox({
 				items: [
-					new Input("_partida",{
-						placeholder: "Partida"
+					new Input("_partida", {
+						placeholder: "Partida",
+						liveChange: this._buscaEndereco.bind(this)
 					}),
-					new Input("_destino",{
+					new Input("_destino", {
 						placeholder: "Destino"
 					}),
-					new Button("_pesquisar",{
+					new Button("_pesquisar", {
 						text: "Buscar...",
-						press: this.busca.bind(this)
+						press: this._busca.bind(this)
 					})
 				]
 			}));
-			
+
 		},
-		
-		busca: function(evt) {
-			
-			
+
+		_buscaEndereco: function (oEvent) {
+			this.fireEvent("buscaEndereco");
 		},
-		
-		renderer : function (oRM, oControl) {
-			
+
+		_busca: function (evt) {
+
+			this.fireEvent("busca");
+
+		},
+
+		renderer: function (oRM, oControl) {
+
 			oRM.write("<div");
 			oRM.writeControlData(oControl);
 			oRM.writeClasses();

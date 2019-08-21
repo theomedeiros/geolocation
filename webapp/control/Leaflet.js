@@ -3,7 +3,7 @@ sap.ui.define([
 	"sap/m/FlexBox"
 ], function (Control, FlexBox) {
 	"use strict";
-	return Control.extend("theo.dev.geolocation.control.OpenStreetMap", {
+	return Control.extend("theo.dev.geolocation.control.Leaflet", {
 		metadata : {
 			properties : {
 				id: { type: "string" },

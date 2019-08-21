@@ -8,27 +8,42 @@ sap.ui.define([
 
 		onAfterRendering: function (oEvent) {
 
-			var mymap = L.map('map').setView([51.505, -0.09], 13);
-			
-			this.byId("map").setMap(mymap);
+			var that = this;
 
-			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-				maxZoom: 18,
-				id: 'mapbox.streets',
-				accessToken: 'pk.eyJ1IjoidGhlb21lZGVpcm9zIiwiYSI6ImNqems4ZjZjNTAwM28zaXBhMWNrdG45cjIifQ.OHVdrSEq9sc4vLf3gEz8Cw'
-			}).addTo(this.byId("map").getMap());
+			navigator.geolocation.getCurrentPosition(function (location) {
+				var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+
+				var mymap = L.map('map').setView(latlng, 13);
+
+				that.byId("map").setMap(mymap);
+
+				L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+					attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+					maxZoom: 18,
+					id: 'mapbox.streets',
+					accessToken: 'pk.eyJ1IjoidGhlb21lZGVpcm9zIiwiYSI6ImNqems4ZjZjNTAwM28zaXBhMWNrdG45cjIifQ.OHVdrSEq9sc4vLf3gEz8Cw'
+				}).addTo(that.byId("map").getMap());
+
+				L.Routing.control({
+					routeWhileDragging: true,
+					geocoder: L.Control.Geocoder.nominatim()
+				}).addTo(that.byId("map").getMap());
+
+			});
+
+		},
+
+		onBuscaEndereco: function (oEvent) {
 
 		},
 
 		onBusca: function (oEvent) {
 
-			var marker = L.marker([51.5, -0.09]).addTo( );
-			var circle = L.circle([51.508, -0.11], {
-				color: 'red',
-				fillColor: '#f03',
-				fillOpacity: 0.5,
-				radius: 500
+			L.Routing.control({
+				waypoints: [
+					L.latLng(-23.598840199999998, -46.689091499999996),
+					L.latLng(51.508, -0.11)
+				]
 			}).addTo(this.byId("map").getMap());
 
 		}
