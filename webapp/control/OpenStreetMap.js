@@ -6,6 +6,8 @@ sap.ui.define([
 	return Control.extend("theo.dev.geolocation.control.OpenStreetMap", {
 		metadata : {
 			properties : {
+				id: { type: "string" },
+				map: { type: "object" }
 			},
 			aggregations : {
 			},
@@ -13,10 +15,12 @@ sap.ui.define([
 			}
 		},
 		init : function () {
+			
+			
 		},
 		renderer : function (oRM, oControl) {
 			
-			oRM.write("<div id='map' class='mapid'>ALO</div>");
+			oRM.write("<div id='map' class='mapid'></div>");
 		}
 	});
 });
